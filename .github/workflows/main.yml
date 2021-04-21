@@ -1,0 +1,32 @@
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: hexo_action
+      # You may pin to the exact commit or the version.
+      # uses: esphere-dumal/hexo_action@c2dbd777c96dd3107f412c22e9d069a61cceba76
+      uses: esphere-dumal/hexo_action@1.0.0
+      with:
+        # github username
+        user_name: luluyuzhi
+        # github user_email
+        user_email: yimin.muduo@outlook.com
+        # the deploy key for repo
+        deploy_key: $yimi_secrets
+        # commit messages for repo
