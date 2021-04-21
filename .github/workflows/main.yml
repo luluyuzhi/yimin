@@ -26,7 +26,7 @@ jobs:
         - name: Build and Deploy
           uses: solybum/hexo-deploy@master
           env:
-            PERSONAL_TOKEN: ${{ YUZH_SECRETS }}
+            PERSONAL_TOKEN: $YUZH_SECRETS
             PUBLISH_REPOSITORY: luluyuzhi/yuzhi # The repository the action should deploy to.
             BRANCH: master  # The branch the action should deploy to.
             PUBLISH_DIR: ./public # The folder the action should deploy.
