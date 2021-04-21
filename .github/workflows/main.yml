@@ -17,16 +17,16 @@ jobs:
         node-version: [10.x, 12.x, 14.x, 15.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: hexo_action
-      # You may pin to the exact commit or the version.
-      # uses: esphere-dumal/hexo_action@c2dbd777c96dd3107f412c22e9d069a61cceba76
-      uses: esphere-dumal/hexo_action@1.0.0
-      with:
-        # github username
-        user_name: luluyuzhi
-        # github user_email
-        user_email: yimin.muduo@outlook.com
-        # the deploy key for repo
-        deploy_key: $YUZH_SECRETS
-        # commit messages for repo
+        # commit messages for repo 
+        
+        - name: Checkout
+          uses: actions/checkout@master
+          with:
+            submodules: true
+        - name: Build and Deploy
+          uses: solybum/hexo-deploy@master
+          env:
+            PERSONAL_TOKEN: ${{ YUZH_SECRETS }}
+            PUBLISH_REPOSITORY: luluyuzhi/yuzhi # The repository the action should deploy to.
+            BRANCH: master  # The branch the action should deploy to.
+            PUBLISH_DIR: ./public # The folder the action should deploy.
