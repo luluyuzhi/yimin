@@ -1,0 +1,1 @@
+[![Node.js CI](https://github.com/luluyuzhi/yimin/actions/workflows/main.yml/badge.svg?event=push)](https://github.com/luluyuzhi/yimin/actions/workflows/main.yml)
