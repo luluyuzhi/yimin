@@ -99,10 +99,3 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: minima
-
-# Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
-# deploy:
-#   type: git
-#   repo: https://github.com/luluyuzhi/yuzhi.git
-#   branch: main
