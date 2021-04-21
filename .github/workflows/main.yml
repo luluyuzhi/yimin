@@ -28,5 +28,5 @@ jobs:
         # github user_email
         user_email: yimin.muduo@outlook.com
         # the deploy key for repo
-        deploy_key: $yimi_secrets
+        deploy_key: $YUZH_SECRETS
         # commit messages for repo
