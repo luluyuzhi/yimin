@@ -37,14 +37,14 @@ instagram: https://instagram.com/adisaktijrs
 stackoverflow: https://stackoverflow.com/story/tobiasreithmeier
 
 # Misc
-nanobar: /js/nanobar.min.js
+nanobar: ../js/nanobar.min.js
 switch_light: ☀️
 switch_dark: 🌑
 
 # favicon
-favicon: /images/favicon.png
+favicon: ../images/favicon.png
 # thumbnail
-thumbnail: /images/thumbnail.jpg
+thumbnail: ../images/thumbnail.jpg
 
 article:
   thumbnail: true
