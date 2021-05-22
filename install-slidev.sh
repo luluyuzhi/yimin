@@ -9,7 +9,7 @@ do
     then
         cd $TARGET
         npm install
-        npm run build
+        npx slidev build
 
         mkdir -p $ROOT/public/Works/slidev/${TARGET##*/}
         cp -r dist/* $ROOT/public/Works/slidev/${TARGET##*/}
