@@ -13,6 +13,7 @@ do
 
         mkdir -p $ROOT/public/Works/slidev/${TARGET##*/}
         cp -r dist/* $ROOT/public/Works/slidev/${TARGET##*/}
+        ls -l $ROOT/public/Works/slidev/${TARGET##*/}
         cd $ROOT
     fi
 done
