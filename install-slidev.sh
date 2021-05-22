@@ -1,5 +1,6 @@
 #!/bin/sh -l
 
+npm i -g create-slidev
 
 ROOT=$PWD
 
