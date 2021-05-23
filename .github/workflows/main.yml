@@ -16,7 +16,7 @@ jobs:
           with:
             submodules: true
         - name: hexo deploy with-hook
-          uses: yuzhishuo/hexo-deploy-with-hook@0.0.6
+          uses: yuzhishuo/hexo-deploy-with-hook@2.0.0
           env:
             PERSONAL_TOKEN: ${{ secrets.YUZHIBLOG }}
             PUBLISH_REPOSITORY: luluyuzhi/luluyuzhi.github.io # The repository the action should deploy to.
