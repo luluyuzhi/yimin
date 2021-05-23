@@ -10,6 +10,7 @@ do
     then
         cd $TARGET
         npm install
+        npm config set registry https://registry.npm.taobao.org
         npx slidev build
 
         mkdir -p $ROOT/public/Works/slidev/${TARGET##*/}
