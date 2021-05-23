@@ -11,7 +11,7 @@ do
         cd $TARGET
         npm install
         npm config set registry https://registry.npm.taobao.org
-        npx slidev build
+        npx slidev build 1>/dev/null 2>&1
 
         mkdir -p $ROOT/public/Works/slidev/${TARGET##*/}
         cp -r dist/* $ROOT/public/Works/slidev/${TARGET##*/}
