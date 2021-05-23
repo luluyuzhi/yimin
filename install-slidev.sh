@@ -10,11 +10,10 @@ do
     then
         cd $TARGET
         npm install
-        npx slidev build
+        npm run build
 
         mkdir -p $ROOT/public/Works/slidev/${TARGET##*/}
         cp -r dist/* $ROOT/public/Works/slidev/${TARGET##*/}
-        ls -l $ROOT/public/Works/slidev/${TARGET##*/}
         cd $ROOT
     fi
 done
