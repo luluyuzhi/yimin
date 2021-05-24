@@ -1,15 +1,16 @@
 {
   "private": true,
+  "version": "0.0.1",
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",
     "export": "slidev export"
   },
   "dependencies": {
-    "@slidev/cli": "^0.13.4",
-    "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*",
-    "@slidev/client": "*"
+    "@slidev/cli": "^0.13.10",
+    "@slidev/client": "^0.13.10",
+    "@slidev/theme-default": "^0.7.4",
+    "@slidev/theme-seriph": "^0.7.1"
   },
   "name": "rust-slidev",
   "hasInstallScript": true
