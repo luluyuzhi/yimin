@@ -1,19 +1,18 @@
 #!/bin/sh -l
 
-
 npm i -g yarn
 
 yarn
-
-
-# yarn workspaces run build
 
 for TARGET in ./packages/*-slidev
 do
     if test -d $TARGET
     then
     echo  $TARGET
-        yarn run slidev build $TARGET/slides.md 
-        # echo -e "[${TARGET##*/}](./slidev/${TARGET##*/}/index.html)\r\n" >> source/Works/index.md
+        yarn run slidev build $TARGET/slides.md --base /Works/${TARGET##*/}
+        mv dist ${TARGET##*/}
+        echo  "[${TARGET##*/}](./${TARGET##*/}/index.html)\r\n" >> ./packages/yimin/source/Works/index.md
     fi
 done
+
+yarn workspace yimin run build
