@@ -8,10 +8,10 @@ for TARGET in ./packages/*-slidev
 do
     if test -d $TARGET
     then
-    echo  $TARGET
+        echo  $TARGET
         yarn run slidev build $TARGET/slides.md --base /Works/${TARGET##*/}
         mv dist ${TARGET##*/}
-        echo  "[${TARGET##*/}](./${TARGET##*/}/index.html)\r\n" >> ./packages/yimin/source/Works/index.md
+        echo  "[${TARGET##*/}](./${TARGET##*/}/index.html)" >> ./packages/yimin/source/Works/index.md
     fi
 done
 

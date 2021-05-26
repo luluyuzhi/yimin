@@ -10,317 +10,178 @@ class: 'text-center'
 highlighter: shiki
 # some information about the slides, markdown enabled
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## rust 特性介绍
 ---
 
-# Welcome to Slidev
-
-Presentation slides for developers
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 p-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
-<a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
-  class="abs-br m-6 text-xl icon-btn opacity-50 !border-none !hover:text-white">
-  <carbon-logo-github />
-</a>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+# Rust 特性详解
 
 ---
 
-# What is Slidev?
+# 变量和可变性
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+让我们从两条赋值语句开始：
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  -moz-text-fill-color: transparent;
-}
-</style>
-
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
----
-
-# Code
-
-Use code snippets and get the highlighting directly!
-
-<!-- https://sli.dev/guide/syntax.html#line-highlighting -->
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
+【1】
+```rust {monaco}
+fn main () {
+  let youdao = "jingpinke";
+  youdao = "xiaobanke";
 }
 
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = {...user, ...update}  
-  saveUser(id, newUser)
+```
+
+【2】
+
+```rust {monaco}
+#![allow(unused)]
+#![allow(const_item_mutation)]
+struct BookInfo( i32, f32 ); //元组结构体
+fn main() {
+  let bi:BookInfo =BookInfo(1, 2.0);
+  bi.1 =3.0;
 }
 ```
 
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
 ---
 
-# Components
+# 变量和可变性
 
-<div grid="~ cols-2 gap-4">
-<div>
+恭喜你，获得了两条错误。
 
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
+```rust
+let youdao = "jingpinke";
+|     ------
+|     |
+|     first assignment to `youdao`
+|     help: make this binding mutable: `mut youdao`
+   youdao = "xiaobanke";
+| ^^^^^^^^^^^^^^^^^^^^ cannot assign twice to immutable variable
 ```
 
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
 
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
 
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
+```rust {5,7}}
+#![allow(unused)]
+#![allow(const_item_mutation)]
+struct BookInfo( i32, f32 ); //元组结构体
+fn main() {
+  let bi:BookInfo =BookInfo(1, 2.0);
+  bi.1 =3.0; // error[E0594]: cannot assign to `bi.1`, as `bi` is not declared as mutable
+}
 ```
 
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
 ---
 
-# Themes
+# 变量和可变性
 
-Slidev comes with powerful theming support. Themes are able to provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
+在Rust 中变量默认是不可改变的（immutable）也就是说当我们声明一个变量的时候, 我们不可以对它重新赋值，如果我们想对它重新赋值 我们应该对它添加 `mut`
+关键字。
+
+这样做有什么好处：
+
+1. 默认的不可变让程序员强制思考（对公司友好）🤞
+2. 默认的不可变让编译器易于追踪代码，从而使得代码易于推导（编译器友好）🤞
+3. mut 向读者表明了其他代码将会改变这个变量值的意图（阅读友好）🤞
+
+没错，哪里都好。😘
+
+嗯……就是对使用者不友好。😒
+---
+
+# 变量和可变性
+
+rust 的可变性/不可变性，会让人想起 其他语言的 const 常量。嗯，有点像，我们来进行一下对比：
 
 <div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
+  
+```javascript
+// const 常量
+const a = {};
+Object.defineProperties(a, {
+  'property1': {
+    value: true,
+    writable: true
+  },
+  'property2': {
+    value: 'Hello',
+    writable: false
+});
+a.property1 =1;
+a = {};
+//Eror: Uncaught TypeError:
+// Assignment to constant variable. at <anonymous>:1:3
 ```
-
-```yaml
----
-theme: seriph
----
+```cpp
+const A *pca1 = new A; 
+A *pa2 = const_cast<A*>(pca1);  
+pa2->m_iNum = 200;    //fine
 ```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
 
 </div>
 
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
 ---
 
-# Animations
+# 变量和可变性
 
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
+MDN 中 const 定义：
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
+MDN: 在javascuript 中 `const` 声明一个只读的常量，一旦声明,常量的**值**就不能改了。
+因此被const 修饰的变量名，不可重新赋值，但内部的成员属性却还可以修改
+
+##### 在 c/c++ 就复杂了很多：
+
+在 c++ 中 又引入了`constexpr`关键字 来表示编译期常量，`const` 在`c++`中又称为运行期常量。
+同样的在 c++ 与 c语言const的对比中 const 又有真常量，假常量之说。
+
+在 c++ 中 `const` 被赋予更多的意义，同时也具有不可变性的含义。记得 `mutable` 这个关键字嘛？
+
+---
+
+# 常量
+
+```rust
+const MAX_POINTS: u32 = 100_000;
 ```
 
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
 
-  <div 
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
+```rust
+#![allow(unused)]
+#![allow(const_item_mutation)]
+struct BookInfo( i32, f32 ); //元组结构体
+fn main() {
+const BI : BookInfo = BookInfo(1, 2.0);
+	BI.1 = 3.0;
+	let nn = 2;
+	const BII:BookInfo = BookInfo(nn, 2.0);
+        print!("{}", BI.1); // print :  2
 }
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-2 gap-4 pt-4 -mb-6">
-
-```mermaid {scale: 0.9}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
 ```
+1. 不允许对常量使用 `mut`。常量不光默认不能变，它总是不能变（总是不能变？）。
+2. 常量只能被设置为常量表达式，而不能是函数调用的结果（类似 c++ 的 constexpr），或任何其他只能在运行时计算出的值。
+（按照推理来说 被 const 修饰的常量应该存在于**常量区**）
+注： *声明const 的变量必须标注 类型名*
 
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
+这么一看 被 `let`修饰的 变量 和被 `const` 修饰的常量好像也没有什么太大的区别。
 
 ---
-layout: center
-class: text-center
+
+# 隐藏（Shadowing） 
+- `let`的遮蔽性
+
+ ```rust {monaco}
+fn main() {
+    let x = 5;
+    let x = x + 1;
+    let x = x * 2;
+    println!("The value of x is: {}", x);
+}
+ ```
+
+<!--
+隐藏与将变量标记为 mut 是有区别的。
+
+ 1. 当不小心尝试对变量重新赋值时，如果没有使用 let 关键字，就会导致编译时错误。通过使用 let，我们可以用这个值进行一些计算，不过计算完之后变量仍然是不变的。
+ 2. mut 与隐藏的另一个区别是，当再次使用 let 时，实际上创建了一个新变量，我们可以改变值的类型，但复用这个名字。例如，假设程序请求用户输入空格字符来说明希望在文本之间显示多少个空格，然而我们真正需要的是将输入存储成数字（多少个空格）
+-->
+
 ---
-
-# Learn More
-
-[Documentations](https://sli.dev) / [GitHub Repo](https://github.com/slidevjs/slidev)
